@@ -1,6 +1,6 @@
 import joblib
-import pandas as pd
 import numpy as np
+import pandas as pd
 from flask import Flask, jsonify, request, render_template
 
 from preproc import process_data
@@ -10,12 +10,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html',)
-
-
-@app.route("/train")
-def train():
-    pass
+    return render_template('index.html')
 
 
 def predict(model, xgb_m=None):
@@ -39,12 +34,14 @@ def predict(model, xgb_m=None):
         predictions = [int(p) for p in predictions]
     except:
         return jsonify({'error': 'prediction error'})
-    
+
     return jsonify({'prediction': predictions})
+
 
 @app.route('/predict_logreg', methods=['POST'])
 def predict_logreg():
     return predict('logreg_model.pkl')
+
 
 @app.route('/predict_xgboost', methods=['POST'])
 def predict_xgboost():

@@ -1,6 +1,7 @@
+import sys
+
 import pandas as pd
 import requests
-import json
 
 
 def check_api(server_url, api, data_json):
@@ -13,11 +14,10 @@ def check_api(server_url, api, data_json):
         print(response.text)
 
 
-def main(server_url = 'http://127.0.0.1:5000/'):
-
-    df = pd.read_csv('data/data.txt',  delimiter=';', encoding='utf8')
+def main(server_url='http://127.0.0.1:5000/'):
+    df = pd.read_csv('data/data.txt', delimiter=';', encoding='utf8')
     df = df[df['DATA_TYPE'] == 'TRAIN']
-    df = df.drop(labels = ["POLICY_IS_RENEWED", 'DATA_TYPE'],axis = 1)
+    df = df.drop(labels=["POLICY_IS_RENEWED", 'DATA_TYPE'], axis=1)
 
     data = df.sample(1)
     data_json = data.to_json(orient='records', indent=2, force_ascii=False)
@@ -34,11 +34,10 @@ def main(server_url = 'http://127.0.0.1:5000/'):
     check_api(server_url, 'predict_xgboost', data_json)
     print()
 
-import sys
 
 if __name__ == "__main__":
+    url = sys.argv[1:]
     try:
-        url = sys.argv[1]
-        main(server_url=url)
+        main(server_url=url[0]) if url else main()
     except:
         print('Incorrect url')
