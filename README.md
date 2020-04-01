@@ -1,15 +1,48 @@
-# Auto-Insurance-Churn
+# Auto Insurance Churn API
 
+The task: To predict is insurance policy renewed or not based on client data.
+There is API for two models based on Logistic Regression and XGboost.
 
-# Docker
+API urls:
+```
+http://<server_name>/predict_logreg
+http://<server_name>/predict_xgboost
+```
+
+## How to install
+
+For requirements see [Pipfile](Pipfile).
+
+Create a virtual environment and install dependencies with [pipenv](https://github.com/pypa/pipenv):
+```sh
+pipenv install
+pipenv shell
+```
+#### Run the server:
+```sh
+gunicorn --bind 127.0.0.1:5000 app:app
+```
+
+## Install and run with Docker
 ```
 docker-compose up
 ```
 
-# Testing the API
-1. Run the Flask API locally for testing.
-2. use HTTPie to make a GET request at the URL of the API. OR you can use the script `python api_check.py`
+## The server has run on Heroku 
+Check it out - 
+[https://auto-insurance-churn-api.herokuapp.com/](https://auto-insurance-churn-api.herokuapp.com/)
 
+# Testing the API
+
+- Run the Flask API locally for testing.
+- use your HTTP client to make a POST request at the URL of the API with a json query.
+API urls:
+```
+http://127.0.0.1:5000/predict_logreg
+http://127.0.0.1:5000/predict_xgboost
+```
+
+A json example:
 ```json
 [
   {
@@ -45,12 +78,22 @@ docker-compose up
 ]
 ```
 
-3. Example of successful output.
+- Example of successful output:
 ```json
-{'prediction': [1]}
+{"prediction": [1]}
+```
+
+## Check API with the script:
+The script send random data from data/data.txt to both API urls:
+```
+python api_check.py 
 ```
 
 ## Using script with heroku
 ```
 python api_check.py https://auto-insurance-churn-api.herokuapp.com/
+```
+## To retrain the models
+```
+python train_models.py
 ```

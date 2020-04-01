@@ -1,10 +1,34 @@
-<h1 id="auto-insurance-churn-api">Auto Insurance Churn API</h1>
-<p>This is some basic, sample markdown.</p>
-<h1 id="testing-the-api">Testing the API</h1>
-<ol>
-<li>Run the Flask API locally for testing.</li>
-<li>use HTTPie to make a GET request at the URL of the API. OR you can use the script</li>
-</ol>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<title>
+Auto Insurance Churn API
+</title>
+</head>
+
+<body>
+
+<main role="main" class="container">
+
+  <div class="starter-template py-5 px-3">
+<h2 class="text-center">Auto Insurance Churn API<br></h2>
+<p class="text-justify">The task: To predict is insurance policy renewed or not based on client data.
+There is API for two models based on Logistic Regression and XGboost.</p>
+<h3 class="text-center">How to use API</h3>
+<ul>
+<li>use your HTTP client to make a POST request at the URL of the API with a json query.
+API urls:<pre><code><span class="hljs-symbol">https:</span><span class="hljs-comment">//auto-insurance-churn-api.herokuapp.com/predict_logreg</span>
+<span class="hljs-symbol">https:</span><span class="hljs-comment">//auto-insurance-churn-api.herokuapp.com/predict_xgboost</span>
+</code></pre></li>
+</ul>
+<p>A json example:</p>
 <pre><code class="lang-json">[
   {
     <span class="hljs-attr">"POLICY_ID"</span>:<span class="hljs-number">96457</span>,
@@ -38,8 +62,16 @@
   }
 ]
 </code></pre>
-<ol>
-<li>Example of successful output.<pre><code class="lang-json">{'prediction': [<span class="hljs-number">1</span>]}
+<ul>
+<li>Example of successful output:<pre><code class="lang-json">{<span class="hljs-attr">"prediction"</span>: [<span class="hljs-number">1</span>]}
 </code></pre>
 </li>
-</ol>
+</ul>
+<h2 id="for-details-">For details:</h2>
+<p><a href="https://github.com/AndreyAnokhin/Auto-Insurance-Churn">https://github.com/AndreyAnokhin/Auto-Insurance-Churn</a></p>
+</div>
+
+</main>
+
+</body>
+</html>
