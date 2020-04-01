@@ -1,0 +1,10 @@
+.env
+venv
+.idea
+.vscode
+*.egg-info
+.cache
+.git
+README.md
+__pycache__
+docker-compose.yml

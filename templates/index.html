@@ -1,0 +1,45 @@
+<h1 id="auto-insurance-churn-api">Auto Insurance Churn API</h1>
+<p>This is some basic, sample markdown.</p>
+<h1 id="testing-the-api">Testing the API</h1>
+<ol>
+<li>Run the Flask API locally for testing.</li>
+<li>use HTTPie to make a GET request at the URL of the API. OR you can use the script</li>
+</ol>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-attr">"POLICY_ID"</span>:<span class="hljs-number">96457</span>,
+    <span class="hljs-attr">"POLICY_BEGIN_MONTH"</span>:<span class="hljs-number">8</span>,
+    <span class="hljs-attr">"POLICY_END_MONTH"</span>:<span class="hljs-number">8</span>,
+    <span class="hljs-attr">"POLICY_SALES_CHANNEL"</span>:<span class="hljs-number">52</span>,
+    <span class="hljs-attr">"POLICY_SALES_CHANNEL_GROUP"</span>:<span class="hljs-number">6</span>,
+    <span class="hljs-attr">"POLICY_BRANCH"</span>:<span class="hljs-string">"Санкт-Петербург"</span>,
+    <span class="hljs-attr">"POLICY_MIN_AGE"</span>:<span class="hljs-number">41</span>,
+    <span class="hljs-attr">"POLICY_MIN_DRIVING_EXPERIENCE"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"VEHICLE_MAKE"</span>:<span class="hljs-string">"Ford"</span>,
+    <span class="hljs-attr">"VEHICLE_MODEL"</span>:<span class="hljs-string">"Kuga"</span>,
+    <span class="hljs-attr">"VEHICLE_ENGINE_POWER"</span>:<span class="hljs-number">150.0</span>,
+    <span class="hljs-attr">"VEHICLE_IN_CREDIT"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"VEHICLE_SUM_INSURED"</span>:<span class="hljs-number">950000.0</span>,
+    <span class="hljs-attr">"POLICY_INTERMEDIARY"</span>:<span class="hljs-string">"509"</span>,
+    <span class="hljs-attr">"INSURER_GENDER"</span>:<span class="hljs-string">"M"</span>,
+    <span class="hljs-attr">"POLICY_CLM_N"</span>:<span class="hljs-string">"2"</span>,
+    <span class="hljs-attr">"POLICY_CLM_GLT_N"</span>:<span class="hljs-string">"1L"</span>,
+    <span class="hljs-attr">"POLICY_PRV_CLM_N"</span>:<span class="hljs-string">"N"</span>,
+    <span class="hljs-attr">"POLICY_PRV_CLM_GLT_N"</span>:<span class="hljs-string">"N"</span>,
+    <span class="hljs-attr">"CLIENT_HAS_DAGO"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"CLIENT_HAS_OSAGO"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"POLICY_COURT_SIGN"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"CLAIM_AVG_ACC_ST_PRD"</span>:<span class="hljs-number">0.0</span>,
+    <span class="hljs-attr">"POLICY_HAS_COMPLAINTS"</span>:<span class="hljs-number">0</span>,
+    <span class="hljs-attr">"POLICY_YEARS_RENEWED_N"</span>:<span class="hljs-string">"0"</span>,
+    <span class="hljs-attr">"POLICY_DEDUCT_VALUE"</span>:<span class="hljs-number">10000.0</span>,
+    <span class="hljs-attr">"CLIENT_REGISTRATION_REGION"</span>:<span class="hljs-string">"Санкт-Петербург"</span>,
+    <span class="hljs-attr">"POLICY_PRICE_CHANGE"</span>:<span class="hljs-number">0.43</span>
+  }
+]
+</code></pre>
+<ol>
+<li>Example of successful output.<pre><code class="lang-json">{'prediction': [<span class="hljs-number">1</span>]}
+</code></pre>
+</li>
+</ol>

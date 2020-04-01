@@ -12,6 +12,7 @@ pandas = "*"
 sklearn = "*"
 gunicorn = "*"
 requests = "*"
+xgboost = "*"
 
 [requires]
 python_version = "3.6"
