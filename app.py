@@ -1,7 +1,9 @@
+import json
+
 import joblib
 import numpy as np
 import pandas as pd
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, abort, make_response
 
 from preproc import process_data
 
@@ -15,17 +17,20 @@ def index():
 
 def predict(model, xgb_m=None):
     try:
-        df = pd.read_json(request.json)
+        data_json = request.json
+        if not isinstance(data_json, str):
+            data_json = json.dumps(request.json)
+        df = pd.read_json(data_json, orient='records')
     except:
-        return jsonify({'error': 'invalid json request'})
+        abort(make_response(jsonify(error='invalid json request'), 400))
     try:
         X = process_data(df, xgb_m)
     except:
-        return jsonify({'error': 'process data error'})
+        abort(make_response(jsonify(error='process data error'), 400))
     try:
         model = joblib.load(model)
     except:
-        return jsonify({'error': 'invalid or no model'})
+        abort(make_response(jsonify(error='invalid or no model'), 400))
 
     try:
         predictions = model.predict(X)
@@ -33,7 +38,7 @@ def predict(model, xgb_m=None):
             predictions = np.asarray([np.argmax(line) for line in predictions])
         predictions = [int(p) for p in predictions]
     except:
-        return jsonify({'error': 'prediction error'})
+        abort(make_response(jsonify(error='prediction error'), 400))
 
     return jsonify({'prediction': predictions})
 
