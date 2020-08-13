@@ -18,7 +18,7 @@
 - flask сервер "завернут" в докер, можно запустить через
    docker-compose up
 - сервер также развернут на heroku:
-`https://auto-insurance-churn-api.herokuapp.com/`  
+[https://auto-insurance-churn-api.herokuapp.com/](https://auto-insurance-churn-api.herokuapp.com/)  
 - для проверки API сделан скрипт: 
     - проверить локально - `python api_check.py`
     - проверить с heroku - `python api_check.py https://auto-insurance-churn-api.herokuapp.com/`  
@@ -36,7 +36,7 @@
 
 ### Продемонстрируйте работу проекта
 
-
+[Видео демонстрация проекта](https://youtu.be/2Cmv5eyWH58)
 
 ### Распишите кратко по шагам процесс работы программы
 **app.py**
