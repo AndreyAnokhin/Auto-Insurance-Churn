@@ -1,48 +1,96 @@
-# Auto Insurance Churn API
+## Описание тестового задания (свой реализованный проект) для Школы будущих СТО
 
-The task: To predict is insurance policy renewed or not based on client data.
-There is API for two models based on Logistic Regression and XGboost.
+### Название проекта
 
-API urls:
+Прогнозирование оттока клиентов
+
+### Какую задачу решает ваш проект?
+
+Проект создан для демонстрации примера внедрении модели машинного обучения в продакшен. 
+Суть модели - по данным клиента предсказать факт пролонгации страхового полиса (КАСКО для автомобиля).
+Задача - создать API для модели. Качеству метрик модели особого внимания не уделялось.
+
+В рамках задания сделано:
+- обучено две модели - линейная регрессия и Xgboost, повторно обучить модели можно запустив скрипт `train_models.py`
+- сделано API для этих моделей:
+    - `http://127.0.0.1:5000/predict_logreg`
+    - `http://127.0.0.1:5000/predict_xgboost`
+- flask сервер "завернут" в докер, можно запустить через
+   docker-compose up
+- сервер также развернут на heroku:
+`https://auto-insurance-churn-api.herokuapp.com/`  
+- для проверки API сделан скрипт: 
+    - проверить локально - `python api_check.py`
+    - проверить с heroku - `python api_check.py https://auto-insurance-churn-api.herokuapp.com/`  
+
+
+### Распишите языки программирования и фреймворки, а также технологии, которые вы использовали в рамках создания проекта и для чего
+- python
+- pandas, sklearn, xgboost, joblib - обработка данных, обучение модели, сохранение и загрузка модели
+- flask - создание API
+- requests - проверка API
+- gunicorn - сервер приложения
+- pipenv - управление зависимостями в python
+- docker/docker-compose - для деплоя
+- heroku - для хостинга
+
+### Продемонстрируйте работу проекта
+
+
+
+### Распишите кратко по шагам процесс работы программы
+**app.py**
+
+    - Сервис загружает сохраненнию модель из pickle-файла
+    - Примимает POST-запрос c данными клиента для анализа
+    - Данные преобразуются из json в pandas dataframe
+    - Происходит предобработка данных в модуле preproc
+    - Данные попадают в модель и происходит расчет прогноза пролонгации полиса клиента
+    - Результат расчета отдается ввиде json в ответе сервера на изначальный POST-запрос
+    
+**train.py**
+
+    - Загружает датасет для обучения из папки data
+    - Происходит предобработка данных в модуле preproc
+    - Датасет разбирается на части для обучения и валидации
+    - Обучаются две модели (линейная регрессия и Xgboost)
+    - Вычисляются метрики модели (accuracy)
+    - Модели сохраняются в pickle файлы
+
+**api_check.py**
+
+    - При вызове скрипта проверяются аргументы командной строки, если задан url, что запросы идут к нему, а не локально
+    - Берется рандомная запись с сведениями о клиенте и отправляется POST запрос на два эндпойнта API сервера
+    - Вывод на экран результатов запросов
+
+### Как запустить вашу программу?
+Установка и запуск сервера:
+ 
+#### Основной способ (через докер):
+```shell script
+docker-compose up
 ```
-http://<server_name>/predict_logreg
-http://<server_name>/predict_xgboost
-```
-
-## How to install
-
-For requirements see [Pipfile](Pipfile).
-
-Create a virtual environment and install dependencies with [pipenv](https://github.com/pypa/pipenv):
+Либо можно создать виртуальное окружение с python и зависимостями с помощью [pipenv](https://github.com/pypa/pipenv):
 ```sh
 pipenv install
 pipenv shell
-```
-#### Run the server:
-```sh
+
+# И потом запустить сервер
+
 gunicorn --bind 127.0.0.1:5000 app:app
 ```
 
-## Install and run with Docker
+#### Протестировать работу API можно с помощью скрипта:
+```shell script
+python api_check.py
 ```
-docker-compose up
-```
 
-## The server has run on Heroku 
-Check it out - 
-[https://auto-insurance-churn-api.herokuapp.com/](https://auto-insurance-churn-api.herokuapp.com/)
-
-# Testing the API
-
-- Run the Flask API locally for testing.
-- use your HTTP client to make a POST request at the URL of the API with a json query.
-API urls:
+Либо можно в ручную отправить запрос (например, через Postman) на один из двух эндпоинтов:
 ```
 http://127.0.0.1:5000/predict_logreg
 http://127.0.0.1:5000/predict_xgboost
 ```
-
-A json example:
+Пример json запроса:
 ```json
 [
   {
@@ -78,22 +126,7 @@ A json example:
 ]
 ```
 
-- Example of successful output:
+Пример успешного ответа сервера («1» – клиент пролонгировался, «0» - клиент не пролонгировался):
 ```json
 {"prediction": [1]}
-```
-
-## Check API with the script:
-The script send random data from data/data.txt to both API urls:
-```
-python api_check.py 
-```
-
-## Using script with heroku
-```
-python api_check.py https://auto-insurance-churn-api.herokuapp.com/
-```
-## To retrain the models
-```
-python train_models.py
 ```
