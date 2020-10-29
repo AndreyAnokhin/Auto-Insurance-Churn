@@ -14,7 +14,7 @@ sklearn = "*"
 gunicorn = "*"
 requests = "*"
 xgboost = "*"
-
+pytest = "*"
 
 [requires]
 python_version = "3.6"
