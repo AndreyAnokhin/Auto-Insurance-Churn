@@ -4,6 +4,16 @@ import pandas as pd
 import requests
 
 
+def sample_request(df_path='data/data.txt'):
+    df = pd.read_csv(df_path, delimiter=';', encoding='utf8')
+    df = df[df['DATA_TYPE'] == 'TRAIN']
+    df = df.drop(labels=["POLICY_IS_RENEWED", 'DATA_TYPE'], axis=1)
+
+    data = df.sample(1)
+    data_json = data.to_json(orient='records', indent=2, force_ascii=False)
+    return data_json
+
+
 def check_api(server_url, api, data_json):
     url = server_url + api
     response = requests.post(url, json=data_json)
@@ -15,12 +25,7 @@ def check_api(server_url, api, data_json):
 
 
 def main(server_url='http://127.0.0.1:5000/'):
-    df = pd.read_csv('data/data.txt', delimiter=';', encoding='utf8')
-    df = df[df['DATA_TYPE'] == 'TRAIN']
-    df = df.drop(labels=["POLICY_IS_RENEWED", 'DATA_TYPE'], axis=1)
-
-    data = df.sample(1)
-    data_json = data.to_json(orient='records', indent=2, force_ascii=False)
+    data_json = sample_request()
 
     print('Auto Insurance Churn API')
     print('Requests:')
